@@ -45,11 +45,18 @@ def split_text(documents: list[Document], chunk_size, chunk_overlap):
 
     return chunks
 
+def clear_chroma_directory(path):
+    for filename in os.listdir(path):
+        file_path = os.path.join(path, filename)
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+
 
 def save_to_chroma(chunks: list[Document]):
     # Clear out the database first.
-    if os.path.exists(CHROMA_PATH):
-        shutil.rmtree(CHROMA_PATH)
+    clear_chroma_directory(CHROMA_PATH)
 
     # Create a new DB from the documents.
     db = Chroma.from_documents(
@@ -79,12 +86,13 @@ if __name__ == "__main__":
     if not os.listdir(DATA_PATH):
         raise ValueError(f"Data path {DATA_PATH} is empty. Please add text files.")
     if not os.path.exists(CHROMA_PATH):
-        os.makedirs(CHROMA_PATH)
+        os.makedirs(CHROMA_PATH, exist_ok=True)
     
     if os.path.exists(CHROMA_PATH) and os.listdir(CHROMA_PATH):
         print(f"Warning: {CHROMA_PATH} already exists and is not empty. It will be cleared.")
-        shutil.rmtree(CHROMA_PATH)
-        os.makedirs(CHROMA_PATH)
+        clear_chroma_directory(CHROMA_PATH)
+        # shutil.rmtree(CHROMA_PATH)    
+        os.makedirs(CHROMA_PATH, exist_ok=True)
 
     # Generate the vector database.
     generate_data_store(args.chunk_size, args.chunk_overlap)
