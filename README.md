@@ -6,7 +6,7 @@ Welcome! This workshop will teach you the basics of Retrieval-Augmented Generati
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/galtea/rag-workshop.git
+   git clone https://github.com/Galtea-AI/rag-workshop.git
    cd rag-workshop
    ```
 
