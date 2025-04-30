@@ -69,6 +69,42 @@ Welcome! This workshop will teach you the basics of Retrieval-Augmented Generati
 - Python 3.9+
 - API access to an LLM provider (e.g., OpenAI, AWS Bedrock)
 
+## 🐳 Docker
+
+Build the Docker image:
+```bash
+docker build -t galtea/rag-workshop .
+```
+
+Create a vector database:
+```bash
+docker run --rm \
+  --env-file .env \
+  --volume ./chroma:/app/chroma \
+  galtea/rag-workshop \
+  python utils/create_vector_database.py --chunk_size 1024 --chunk_overlap 256
+```
+
+Run the RAG pipeline:
+```bash
+docker run --rm \
+  --env-file .env \
+  --volume ./chroma:/app/chroma \
+  galtea/rag-workshop \
+  python rag/run_rag.py --query "<query>" --threshold 0.7
+```
+
+Run the API:
+```bash
+docker run --rm \
+  --env-file .env \
+  --volume ./chroma:/app/chroma \
+  -p 8000:8000 \
+  galtea/rag-workshop \
+  uvicorn app.main:app --host 0.0.0.0 --reload --port 8000
+```
+
+
 ---
 
 ## 🙌 Credits
