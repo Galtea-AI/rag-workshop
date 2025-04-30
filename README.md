@@ -43,32 +43,6 @@ Welcome! This workshop will teach you the basics of Retrieval-Augmented Generati
    - Modify chunking logic: `utils/create_vector_database.py`
    - Add your own documents to `docs/`
 
----
-
-## 📂 Folders Explained
-
-- `ingestion/`: Load and chunk documents
-- `vector_store/`: Build and save your vector index
-- `rag/`: Combine retrieval + generation
-- `evaluation/`: Manually or automatically evaluate responses
-- `utils/`: API wrappers and helper functions
-
----
-
-## 🧠 Concepts Covered
-
-- Vector embeddings and similarity search
-- Prompt engineering
-- Retrieval-Augmented Generation (RAG) architecture
-- Evaluation of LLM-based systems
-
----
-
-## 📌 Requirements
-
-- Python 3.9+
-- API access to an LLM provider (e.g., OpenAI, AWS Bedrock)
-
 ## 🐳 Docker
 
 Build the Docker image:
@@ -104,6 +78,11 @@ docker run --rm \
   uvicorn app.main:app --host 0.0.0.0 --reload --port 8000
 ```
 
+
+## 📌 Requirements
+
+- Python 3.10+
+- API access to an LLM provider (OpenAI)
 
 ---
 
