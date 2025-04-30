@@ -1,0 +1,7 @@
+chroma
+.env
+.git
+venv
+__pycache__
+Dockerfile
+Makefile
